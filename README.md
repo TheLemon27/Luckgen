@@ -24,6 +24,7 @@ This tool currently randomly generates:
   - Rarity
   - Group
   - & Effects/Description
+
 The remaining things (Name, Image, etc.) is either hardcoded, or not randomized.
 
 The mod files this tool generates (to my knowledge) only work for the Steam version of LBAL.
