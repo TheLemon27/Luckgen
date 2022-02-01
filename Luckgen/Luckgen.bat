@@ -19,15 +19,27 @@ for /f "tokens=*" %%s in (params.txt) do (
 del params.txt
 ren sneakylikeafox.txt params.txt
 
-
+set /A valueInversionRNG=%random% %%3
 set /A value=%random% %%%valueMax%
-
 set /A rarityRNG=%random% %%4
 set /A groupRNG=%random% %%47
 set /A effectAnimationRNG=%random% %%4
 set /A effectTargetRNG=%random% %%3
 set /A effectActionRNG=%random% %%5
 set /A effectTriggerRNG=%random% %%3
+set /A effectValueInversionRNG=%random% %%3
+
+if %effectValueInversionRNG%==2 (
+	set /A effectValueInversionRNG=1
+) else (
+	set /A effectValueInversionRNG=0
+)
+
+if %valueInversionRNG%==2 (
+	set /A valueInversionRNG=1
+) else (
+	set /A valueInversionRNG=0
+)
 
 if %effectActionRNG%==0 (
 	set /A effectValue=%random% %%51
@@ -35,54 +47,57 @@ if %effectActionRNG%==0 (
 	set /A effectValue=%random% %%51
 ) else if %effectActionRNG%==2 (
 	set effectValue=true
+	set /A effectValueInversionRNG=0
 ) else if %effectActionRNG%==3 (
 	set /A effectValue=%random% %%6
+	set /A effectValueInversionRNG=0
 ) else if %effectActionRNG%==4 (
 	set /A effectValue=%random% %%6
+	set /A effectValueInversionRNG=0
 ) else if %effectActionRNG%==5 (
 	set /A effectValue=
 )
 
 if %effectTriggerRNG%==2 (
-set effectTriggerRNG=0
+	set effectTriggerRNG=0
 ) else (
-set effectTriggerRNG=1
+	set effectTriggerRNG=1
 )
 
 if %effectValue%==true (
-set effectValueDesc=
+	set effectValueDesc=
 ) else (
-set effectValueDesc=!effectValue!
+	set effectValueDesc=!effectValue!
 )
 
 if %effectTargetRNG%==0 (
-  set /A effectTargetOtherRNG=47
-  set /A effectTargetOtherShellChoice=0
-  set /A effectAnimationTargetChoice=0
+	set /A effectTargetOtherRNG=47
+	set /A effectTargetOtherShellChoice=0
+	set /A effectAnimationTargetChoice=0
 ) else if %effectTargetRNG%==1 (
-  set /A effectTargetOtherRNG=%random% %%47
-  set /A effectAnimationTargetChoice=1
-  if %effectTriggerRNG%==0 (
-    set /A effectTargetOtherShellChoice=1
-  ) else (
-    set /A effectTargetOtherShellChoice=2
-  )
+	set /A effectTargetOtherRNG=%random% %%47
+	set /A effectAnimationTargetChoice=1
+	if %effectTriggerRNG%==0 (
+		set /A effectTargetOtherShellChoice=1
+	) else (
+		set /A effectTargetOtherShellChoice=2
+	)
 ) else if %effectTargetRNG%==2 (
-  set /A effectTargetOtherRNG=%random% %%47
-  set /A effectAnimationTargetChoice=1
-  if %effectTriggerRNG%==0 (
-    set /A effectTargetOtherShellChoice=1
-  ) else (
-    set /A effectTargetOtherShellChoice=2
-  )
+	set /A effectTargetOtherRNG=%random% %%47
+	set /A effectAnimationTargetChoice=1
+	if %effectTriggerRNG%==0 (
+		set /A effectTargetOtherShellChoice=1
+	) else (
+		set /A effectTargetOtherShellChoice=2
+	)
 )
 
 if %effectTriggerRNG%==1 (
-  set effectTriggerShellChoice=1
+	set effectTriggerShellChoice=1
 ) else if %effectTargetOtherRNG%==47 (
-  set effectTriggerShellChoice=0
+	set effectTriggerShellChoice=0
 ) else (
-  set effectTriggerShellChoice=1
+	set effectTriggerShellChoice=1
 )
 
 set effectTargetOtherShell[0]=
@@ -105,15 +120,15 @@ Echo;	inherit_art = false
 Echo;	inherit_groups = false
 Echo;	display_name = "Code Fragment"
 Echo;	localized_names = {}
-Echo;	value = %value%
-Echo;	description = "!effectTargetDesc[%effectTargetRNG%]!!effectTargetOtherDesc[%effectTargetOtherRNG%]!!effectActionDesc[%effectActionRNG%]!%effectValueDesc%!effectActionDesc2[%effectActionRNG%]!!effectTriggerDesc[%effectTriggerRNG%]!"
+Echo;	value = !valueInversion[%valueInversionRNG%]!%value%
+Echo;	description = "!effectTargetDesc[%effectTargetRNG%]!!effectTargetOtherDesc[%effectTargetOtherRNG%]!!effectActionDesc[%effectActionRNG%]!!valueInversion[%effectValueInversionRNG%]!%effectValueDesc%!effectActionDesc2[%effectActionRNG%]!!effectTriggerDesc[%effectTriggerRNG%]!"
 Echo;	localized_descriptions = {}
 Echo;	values = []
 Echo;	rarity = !rarities[%rarityRNG%]!
 Echo;	groups = [!effectTargetOther[%groupRNG%]!]
 Echo;	sfx = []
 Echo;	effects = [
-Echo;	{"effect_type": !effectTarget[%effectTargetRNG%]! !effectTriggershell[%effectTriggerShellChoice%]!"value_to_change": !effectAction[%effectActionRNG%]! "diff": !effectValue!, "anim": !effectAnimation[%effectAnimationRNG%]!!effectAnimationTarget[%effectAnimationTargetChoice%]!},
+Echo;	{"effect_type": !effectTarget[%effectTargetRNG%]! !effectTriggershell[%effectTriggerShellChoice%]!"value_to_change": !effectAction[%effectActionRNG%]! "diff": !valueInversion[%effectValueInversionRNG%]!!effectValue!, "anim": !effectAnimation[%effectAnimationRNG%]!!effectAnimationTarget[%effectAnimationTargetChoice%]!},
 Echo;	{}
 Echo;	]
 )  >  "%output%\RandomlyGeneratedSymbol%timesRun%\scripts\custom.gd"
