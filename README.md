@@ -11,6 +11,7 @@ There should be a folder located in the Output folder called "RandomlyGeneratedS
 Locate your LBAL mod folder (How to locate your LBAL mod folder) A1. Right click the game in your steam library A2. Go to Manage > Browse local files A3. Run "LBAL Mod Uploader.exe" A4. Click the button that says "Open Mod Directory"
 Copy the folder from the Output folder into the mod directory
 Enjoy! :)
+
 === PLEASE NOTE ===
 
 This tool currently randomly generates:
