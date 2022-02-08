@@ -1,6 +1,8 @@
 set /A timesRun=0
 set "output=Output"
 set /A valueMax=8
+set valueInversion[0]=
+set valueInversion[1]=-
 set rarities[0]="common"
 set rarities[1]="uncommon"
 set rarities[2]="rare"
