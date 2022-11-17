@@ -6,7 +6,7 @@ Luckgen is a tool for generating randomized symbols for the game Luck be a Landl
 
 === Intructions ===
 
-1. Open Oatgen.bat
+1. Open Luckgen.bat
 2. There should be a folder located in the Output folder called "RandomlyGeneratedSymbol(number)"
 3. Locate your LBAL mod folder
  (How to locate your LBAL mod folder)
