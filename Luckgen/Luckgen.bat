@@ -49,12 +49,15 @@ if %effectActionRNG%==0 (
 ) else if %effectActionRNG%==2 (
 	set effectValue=true
 	set /A effectValueInversionRNG=0
+	set /A valueInversionRNG=0
 ) else if %effectActionRNG%==3 (
 	set /A effectValue=%random% %%6
 	set /A effectValueInversionRNG=0
+	set /A valueInversionRNG=0
 ) else if %effectActionRNG%==4 (
 	set /A effectValue=%random% %%6
 	set /A effectValueInversionRNG=0
+	set /A valueInversionRNG=0
 ) else if %effectActionRNG%==5 (
 	set /A effectValue=
 )
@@ -103,7 +106,8 @@ if %effectTriggerRNG%==1 (
 
 set effectTargetOtherShell[0]=
 set effectTargetOtherShell[1]={!effectTargetOther[%effectTargetOtherRNG%]!}
-set effectTargetOtherShell[2]=, {!effectTargetOther[%effectTargetOtherRNG%]!}
+set effectTargetOtherShell[2]={!effectTargetOther[%effectTargetOtherRNG%]!}
+ :: there was a comma and a space before the curly brackets but that broke the game so uhhhh maybe ill replace it later :shrug:
 set effectTriggerShell[0]=
 set effectTriggerShell[1]="comparisons": [!effectTargetOtherShell[%effectTargetOtherShellChoice%]!], 
 

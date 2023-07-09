@@ -173,7 +173,7 @@ rem replace each spin with when this symbol is <color_df4d69>destroyed<end> late
 set effectAction[0]="value_bonus", 
 set effectAction[1]="permanent_bonus", 
 set effectAction[2]="destroyed", 
-set effectAction[3]="value_multiplier"
+set effectAction[3]="value_multiplier",
 set effectAction[4]="permanent_multiplier", 
 set effectAction[5]=
 set effectActionDesc[0]=give(s) <icon_coin><color_FAF420>
